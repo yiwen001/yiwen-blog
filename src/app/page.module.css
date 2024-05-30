@@ -1,6 +1,11 @@
+/* 引入字体 */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&display=swap');
+
+/* 应用字体 */
+ 
 .main {
-  margin: 0;
-  padding: 0;
+   
+  
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -8,11 +13,28 @@
   background-size: cover;
   display: flex;
   flex-direction: column;
+  color: white; 
+}
+.content{
+  display: flex;
+  height:1000px;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
  
-  
+  overflow: hidden;
 }
 
- 
+.mainline{
+  font-size: 36px;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 60px;
+}
+.customButton{
+  border: 2px solid rgba(255, 255, 255, 0.335) !important;
+  background-color: transparent !important;
+  color: white !important;
+  border-radius: 51px !important;
+  padding: 10px 20px !important;
+
+}
