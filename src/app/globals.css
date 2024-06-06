@@ -3,4 +3,7 @@ html, body {
   padding: 0;
   overflow: hidden;
   height: 100%;
+  position: absolute;
+ background-color: black;
+ z-index: -5;
 }

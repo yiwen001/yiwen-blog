@@ -1,7 +1,20 @@
+"use client"
 import styles from "./page.module.css";
 import {Button} from "@nextui-org/button";
+import { useRouter } from 'next/navigation';
+import React, { useRef,useState } from 'react';
 export default function Home() {
+  const router = useRouter();
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const handleClick = () => {
+    setIsVisible(true); // 设置 About Me 部分为可见
+    setTimeout(() => {
+      aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+    },100); // 稍微延迟滚动以确保 CSS 过渡生效
+  };
   return (
+    <>
     <div className={styles.main}>
       <div className={styles.nav}>
         <div className={styles.icon} id={styles.menu} style={{width:'25px',height:'25px'}}></div>
@@ -9,7 +22,7 @@ export default function Home() {
        <div className={styles.content}>  
        <div className={styles.mainline}>  Hi, I am Yiwen  </div>
      
-       <Button className={styles.customButton}>
+       <Button className={styles.customButton}  onClick={handleClick}>
        About me 👋
       </Button> 
         
@@ -31,8 +44,18 @@ export default function Home() {
  
 
         </div>
-       
+
+     
+   
        
     </div>
+    <div ref={aboutRef} className={`${styles.aboutSection} ${isVisible ? styles.aboutSectionVisible : ''}`}>
+   <h1>About Me</h1>
+  
+ </div>
+ 
+
+ </>
+  
   );
 }
