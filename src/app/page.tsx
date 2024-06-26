@@ -50,8 +50,29 @@ export default function Home() {
        
     </div>
     <div ref={aboutRef} className={`${styles.aboutSection} ${isVisible ? styles.aboutSectionVisible : ''}`}>
-   <h1>About Me</h1>
-  
+      <div className={styles.secondMain}>
+      <div className={styles.secondNav}>
+     <div> About Me</div> 
+     <div className={styles.icon} id={styles.menu} style={{width:'20px',height:'20px'}}></div></div>
+     <div className={styles.intro}>
+      <p>
+      Hi, I am Rony! I'm a designer with 3 years of web development
+      experience with the past 2 years spent honing my skills in
+      WordPress, Shopify. And Webflow
+      Hi, I am Rony! I'm a designer with 3 years of web development
+      experience with the past 2 years spent honing my skills in
+      WordPress, Shopify. And Webflow
+      </p>
+      <div className={styles.intro2}>
+     
+      Hi, I am Rony! I'm a designer with 3 years of web development
+      experience with the past 2 years spent honing my skills in
+      WordPress, Shopify. And Webflow
+    
+      <div className={styles.avatar}></div>
+      </div>
+     </div>
+     </div>
  </div>
  
 
