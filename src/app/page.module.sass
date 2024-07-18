@@ -1,0 +1,128 @@
+/* 引入字体 */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400&display=swap')
+@font-face 
+  font-family: 'Montserrat SemiBold Italic' 
+  src: url('/fonts/Montserrat-SemiBoldItalic.ttf') format('truetype')
+
+
+@font-face
+  font-family: 'helve' 
+  src: url('/fonts/HelveticaNowDisplay-Regular.ttf') format('truetype')
+
+@import "./styles/helper.sass"
+ 
+@keyframes rotateAndZoom 
+  0% 
+    transform: scale(3) rotate(40deg) 
+  
+  50% 
+    transform: scale(1) rotate(0deg)
+  
+  100% 
+    transform: scale(3) rotate(40deg)
+  
+ 
+/* 应用动画到 main::before */
+.main 
+  position: relative
+  width: 100vw
+  height: 100vh
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  color: white
+  margin-right: px(125)
+  padding-right: px(125)
+  padding-top: px(46)
+  margin-bottom: px(125)
+  overflow-y: auto
+
+
+/* 黑色背景 */
+.main::before 
+  content: ''
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: black
+  z-index: -2 
+
+
+/* 背景图片动画 */
+.main::before 
+  content: ''
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-image: url(/cover2.svg)
+  background-size: cover
+  background-position: center
+  z-index: -1
+  animation: rotateAndZoom 15s infinite cubic-bezier(0.4, 0, 0.2, 1)
+
+
+.content
+  display: flex
+  height:1000px
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  overflow: hidden
+
+
+.mainline
+  font-size: px(38)
+  font-family: 'Montserrat', sans-serif
+  margin-bottom: px(60)
+
+.customButton
+  border: px(2) solid rgba(255, 255, 255, 0.335) !important
+  background-color: transparent !important
+  color: white !important
+  border-radius: px(51) !important
+  padding: px(10) px(20) !important
+  font-family: 'Montserrat SemiBold Italic',sans-serif
+
+.footer
+  display: flex
+  justify-content: center
+  margin-bottom:5%
+
+.nav
+  display: flex
+  justify-content: flex-end
+
+
+.icon
+  width: px(20)
+  height: px(20)
+  background-size: contain
+  background-repeat: no-repeat
+  margin-right: px(30) 
+  cursor: pointer 
+
+#github
+  background-image: url('/github.svg')
+
+#linkedin
+  background-image: url('/linkedin.svg')
+
+#email
+  background-image: url('/email.svg')
+
+#medium
+  background-image: url('/medium.svg')
+
+#instagram
+  background-image: url('/instagram.svg')
+
+#menu
+  background-image: url('/menu-2.svg')
+
+ 
+
