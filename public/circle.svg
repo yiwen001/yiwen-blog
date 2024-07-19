@@ -1,0 +1,47 @@
+<svg width="519.000000" height="519.000000" viewBox="0 0 519 519" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<filter id="filter_5_304_dd" x="0.000000" y="0.000000" width="519.000000" height="519.000000" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+			<feGaussianBlur stdDeviation="18.6667" result="effect_layerBlur_1"/>
+		</filter>
+		<filter id="filter_5_305_dd" x="52.000000" y="52.000000" width="415.000000" height="415.000000" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+			<feGaussianBlur stdDeviation="2" result="effect_layerBlur_1"/>
+		</filter>
+		<filter id="filter_5_306_dd" x="42.000000" y="42.000000" width="435.000000" height="435.000000" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+			<feGaussianBlur stdDeviation="4.66667" result="effect_layerBlur_1"/>
+		</filter>
+		<filter id="filter_5_269_dd" x="8.500000" y="8.500000" width="502.000000" height="502.000000" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+			<feGaussianBlur stdDeviation="10.3333" result="effect_layerBlur_1"/>
+		</filter>
+		<radialGradient gradientTransform="translate(259.5 259.5) rotate(180) scale(309.5 309.5)" cx="0.000000" cy="0.000000" r="1.000000" id="paint_angular_5_269_0" gradientUnits="userSpaceOnUse">
+			<stop offset="0.163351" stop-color="#D8B63C"/>
+			<stop offset="0.378115" stop-color="#E2641C"/>
+			<stop offset="0.632887" stop-color="#B75CFF"/>
+			<stop offset="0.878761" stop-color="#43D764"/>
+		</radialGradient>
+	</defs>
+	<rect id="Base" width="400.000000" height="400.000000" transform="translate(59.500000 59.500000)" fill="#FFFFFF" fill-opacity="0"/>
+	<g filter="url(#filter_5_304_dd)">
+		<circle id="Ellipse 14" cx="259.500000" cy="259.500000" r="200.000000" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="7.000000"/>
+	</g>
+	<g filter="url(#filter_5_305_dd)">
+		<circle id="Ellipse 15" cx="259.500000" cy="259.500000" r="200.000000" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="3.000000"/>
+	</g>
+	<g filter="url(#filter_5_306_dd)">
+		<circle id="Ellipse 16" cx="259.500000" cy="259.500000" r="200.000000" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="7.000000"/>
+	</g>
+	<rect id="Color" width="400.000000" height="400.000000" transform="translate(59.500000 59.500000)" fill="#FFFFFF" fill-opacity="0"/>
+	<g filter="url(#filter_5_269_dd)" style="mix-blend-mode:color-dodge">
+		<circle id="Ellipse 16" cx="259.500000" cy="259.500000" r="200.000000" stroke="url(#paint_angular_5_269_0)" stroke-opacity="1.000000" stroke-width="40.000000"/>
+	</g>
+</svg>

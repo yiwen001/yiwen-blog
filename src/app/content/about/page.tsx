@@ -1,46 +1,16 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './page.module.sass';
-import { Dropdown, Menu } from 'antd';
-import { useRouter } from 'next/navigation';
-export default function AboutPage() {
-  const [visible, setVisible] = useState(false);
-  const router = useRouter();
-  const handleVisibleChange = (flag) => {
-    setVisible(flag);
-  };
  
-  const handleMenuClick = (e) => {
-    if (e.key === 'home') {
-      router.push('/');
-    }
-  };
-  const menu = (
-    <Menu   
-    onClick={handleMenuClick}
-     className={styles.customMenu}>
-      <Menu.Item key="home" className={styles.menuItem}>Home</Menu.Item>
-      <Menu.Item key="resume" className={styles.menuItem}>Resume</Menu.Item>
-      <Menu.Item key="blog" className={styles.menuItem}>Blog</Menu.Item>
-    </Menu>
-  );
+export default function AboutPage() {
+ 
 
   return (
     <div className={styles.aboutSection}>
       <div className={styles.secondMain}>
         <div className={styles.secondNav}>
           <div>About Me</div>
-          <Dropdown 
-            overlay={menu} 
-            trigger={['click']} 
-            visible={visible} 
-            onVisibleChange={handleVisibleChange}>
-            <div 
-              className={styles.icon} 
-              id={styles.menu} 
-              onClick={() => setVisible(!visible)}>
-            </div>
-          </Dropdown>
+         
         </div>
         <div className={styles.intro}>
           <div>

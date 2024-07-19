@@ -3,6 +3,8 @@ import styles from "./page.module.sass";
 import {Button} from "@nextui-org/button";
 import { useRouter  } from 'next/navigation';
 import React, { useRef,useState,useEffect} from 'react';
+import FluidEffect from './components/anime/fluid';
+import Circle  from "./components/circle";
 export default function Home() {
   const router = useRouter();
   const handleClick = () => {
@@ -13,11 +15,16 @@ export default function Home() {
   return (
     <>
     <div className={styles.main}>
-      <div className={styles.nav}>
-        <div className={styles.icon} id={styles.menu} style={{width:'25px',height:'25px'}}></div>
-      </div>
+ 
        <div className={styles.content}>  
-       <div className={styles.mainline}>  Hi, I am XXXXX  </div>
+       <div className={styles.mainline}> 
+        <div className={styles.textWrapper}>  
+          Hi, I am XXXXX
+          </div>
+        <div className={styles.circle} >
+         <Circle/>
+       </div>
+          </div>
      
        <Button className={styles.customButton}  onClick={handleClick}>
        About me 👋
@@ -25,7 +32,7 @@ export default function Home() {
         </div> 
         <div className={styles.footer}>
         <a href="https://github.com/yiwen001" target="_blank">
-        <div className={styles.icon} id={styles.github} style={{height:'18px'}}></div>
+        <div className={styles.icon} id={styles.github}  ></div>
         </a>
         <a href="https://www.linkedin.com/in/yiwen-gao-ab5580220/" target="_blank">
       <div className={styles.icon} id={styles.linkedin}></div>   </a>
@@ -37,7 +44,7 @@ export default function Home() {
       <a href="https://www.instagram.com/1vvenn/" target="_blank">
     
       <div className={styles.icon} id={styles.instagram}></div></a>
-        </div>
+      </div>
   
     </div>
 

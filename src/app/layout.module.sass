@@ -1,0 +1,32 @@
+@import "./styles/helper.sass"
+.fixedMenu
+  position: fixed
+  top: px(50)
+  right: px(120)
+  z-index: 1000
+
+.icon
+  width: px(30)
+  height: px(30)
+  background-size: contain
+  background-repeat: no-repeat
+  margin-right: px(40) 
+  cursor: pointer 
+  background-image: url('/menu-2.svg')
+.customMenu
+  display: flex
+  flex-direction: column
+  background-color: #2b2b2b !important
+  color: #a9a9a9 !important
+  height: px(200) !important
+  width: 100% !important
+  justify-content: center
+  align-content: center
+
+.menuItem 
+  margin-left: px(20) !important
+  margin-right: px(10) !important
+  color: #a9a9a9 !important
+  margin-bottom: 10px !important
+  &:hover
+    background-color: rgba(100, 98, 98, 0.8) !important

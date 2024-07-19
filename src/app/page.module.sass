@@ -25,8 +25,8 @@
  
 /* 应用动画到 main::before */
 .main 
-  position: relative
-  width: 100vw
+  
+  width: 100%
   height: 100vh
   overflow: hidden
   display: flex
@@ -35,40 +35,40 @@
   margin-right: px(125)
   padding-right: px(125)
   padding-top: px(46)
-  margin-bottom: px(125)
-  overflow-y: auto
+ 
+  
 
 
-/* 黑色背景 */
-.main::before 
-  content: ''
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  background-color: black
-  z-index: -2 
+// /* 黑色背景 */
+// .main::before 
+//   content: ''
+//   position: absolute
+//   top: 0
+//   left: 0
+//   width: 100%
+//   height: 100%
+//   background-color: black
+//   z-index: -2 
 
 
-/* 背景图片动画 */
-.main::before 
-  content: ''
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  background-image: url(/cover2.svg)
-  background-size: cover
-  background-position: center
-  z-index: -1
-  animation: rotateAndZoom 15s infinite cubic-bezier(0.4, 0, 0.2, 1)
+// /* 背景图片动画 */
+// .main::before 
+//   content: ''
+//   position: absolute
+//   top: 0
+//   left: 0
+//   width: 100%
+//   height: 100%
+//   background-image: url(/cover2.svg)
+//   background-size: cover
+//   background-position: center
+//   z-index: -1
+//   animation: rotateAndZoom 15s infinite cubic-bezier(0.4, 0, 0.2, 1)
 
 
 .content
-  display: flex
-  height:1000px
+  display: flex 
+  height: px(1000)
   flex-direction: column
   align-items: center
   justify-content: center
@@ -79,7 +79,16 @@
   font-size: px(38)
   font-family: 'Montserrat', sans-serif
   margin-bottom: px(60)
-
+.textWrapper 
+  position: relative
+  display: inline-block
+.circle
+  position: absolute
+  top: calc(50% - px(240)) 
+  left:  calc(50% ) 
+  width: px(350)
+  height: px(350)
+  z-index: -1
 .customButton
   border: px(2) solid rgba(255, 255, 255, 0.335) !important
   background-color: transparent !important
@@ -94,18 +103,21 @@
   margin-bottom:5%
 
 .nav
-  display: flex
-  justify-content: flex-end
+  position: absolute
+  top: px(46)
+  right: px(120)
+ 
 
 
 .icon
-  width: px(20)
-  height: px(20)
+  width: px(30)
+  height: px(30)
   background-size: contain
   background-repeat: no-repeat
-  margin-right: px(30) 
+  margin-right: px(40) 
   cursor: pointer 
 
+ 
 #github
   background-image: url('/github.svg')
 

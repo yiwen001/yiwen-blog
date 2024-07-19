@@ -40,6 +40,9 @@ devDependencies:
   '@types/node':
     specifier: ^20
     version: 20.12.13
+  '@types/p5':
+    specifier: ^1.7.6
+    version: 1.7.6
   '@types/react':
     specifier: ^18
     version: 18.3.3
@@ -3110,6 +3113,10 @@ packages:
     resolution: {integrity: sha512-gBGeanV41c1L171rR7wjbMiEpEI/l5XFQdLLfhr/REwpgDy/4U8y89+i8kRiLzDyZdOkXh+cRaTetUnCYutoXA==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
+
+  /@types/p5@1.7.6:
+    resolution: {integrity: sha512-6pLTOo0V3N5jZb5nTwjiv3lPHLK3Z/TjbhQUj8CTWXocUk1Z/f6OHTp3Pcwi1BhWnf5gqKUcyEb1gP0KIJuQgw==}
     dev: true
 
   /@types/prop-types@15.7.12:

@@ -6,6 +6,8 @@ html, body {
   background-color: black;
   z-index: -5;
   position: absolute;
+  overflow-x: hidden;
+  overflow-y: auto;
 /*  
   position: absolute;
  background-color: black;
