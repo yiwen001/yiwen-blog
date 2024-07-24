@@ -1,14 +1,29 @@
 @import "./styles/helper.sass"
 .circle
+    position: relative // 添加相对定位以便于内部元素绝对定位
     width: 100%
     height: 100%
-    background-image: url('/circle.svg')
-    background-size: contain
+    background-image: url('/circle1.png')
+    background-size: cover
     background-repeat: no-repeat
+    animation: rotate 10s linear infinite
     .pointer
-        width: px(100)
-        height: px(100)
-        background-image: url('/pointer.svg')
-        background-size: contain
-        background-repeat: no-repeat
-        
+        position: absolute
+        width: px(50)
+        height: px(50)
+        top: calc(25%  )
+        left: calc(20%  ) 
+        mix-blend-mode: lighten 
+        background-image: radial-gradient(circle at center, rgb(255, 255, 255), rgba(29, 29, 29, 0))
+        filter: blur(px(12))
+        transform: translate(-50%, -50%) rotate(0deg) 
+        transform-origin: center center
+      
+@keyframes rotate// 定义动画的关键帧
+    0%
+        transform: translate(-50%, -50%) rotate(0deg)  // 开始时旋转角度为0
+    
+    100%
+        transform: translate(-50%, -50%) rotate(360deg)  // 结束时旋转360度
+    
+     
