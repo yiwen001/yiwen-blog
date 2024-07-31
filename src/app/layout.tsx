@@ -38,7 +38,7 @@ export default function RootLayout({
      className={styles.customMenu}>
       <Menu.Item key="home" className={styles.menuItem}>Home</Menu.Item>
       <Menu.Item key="resume" className={styles.menuItem}>Resume</Menu.Item>
-      <Menu.Item key="blog" className={styles.menuItem}>Blog</Menu.Item>
+      <Menu.Item key="projects" className={styles.menuItem}>Projects</Menu.Item>
     </Menu>
   );
   return (

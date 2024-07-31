@@ -19,7 +19,7 @@ export default function Home() {
        <div className={styles.content}>  
        <div className={styles.mainline}> 
         <div className={styles.textWrapper}>  
-          Hi, I am XXXXX
+          Hi, I am Yiwen
           </div>
         <div className={styles.circle} >
          <Circle/>
