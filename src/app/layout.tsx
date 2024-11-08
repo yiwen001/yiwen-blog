@@ -7,9 +7,6 @@ import { Dropdown, Menu } from 'antd';
 import { useRouter } from 'next/navigation';
 import styles from './layout.module.sass'; // 确保你创建了这个 CSS 模块
 const inter = Inter({ subsets: ["latin"] });
-
- 
-
 export default function RootLayout({
   children,
 }:  {
@@ -17,19 +14,18 @@ export default function RootLayout({
 }) {
   const [visible, setVisible] = useState(false);
   const router = useRouter();
-
   const handleVisibleChange = (flag: boolean) => {
     setVisible(flag);
   };
-  
-
   const handleMenuClick = (e: any) => {
     if (e.key === 'home') {
       router.push('/');
     } else if (e.key === 'resume') {
       // 处理简历导航
-    } else if (e.key === 'blog') {
+      router.push('/content/resume');
+    } else if (e.key === 'projects') {
       // 处理博客导航
+      router.push('/content/projects');
     }
   };
   const menu = (
