@@ -1,0 +1,73 @@
+// global.scss
+@import "./styles/helper.sass"
+.container
+  margin-top: px(100)
+  display: flex
+  flex-direction: column
+ 
+  gap: px(40)
+ 
+.card 
+  background: rgba(255, 255, 255, 0.1)
+  backdrop-filter: blur(px(15))
+  padding: px(20)
+  width: px(800)
+  height: px(150)
+  display: flex
+  flex-direction: row
+  color: rgba(255, 255, 255, 0.8)
+  border: px(1) solid rgba(255, 255, 255, 0.3)
+  border-radius: px(16)
+  align-items: center
+  justify-content: center
+  gap: px(40)
+  box-shadow: 0 px(8) px(32) rgba(255, 255, 255, 0.1)
+  position: relative
+  transition: all 0.3s ease
+  margin: 0 auto
+  &::before
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    border-radius: px(16)
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%)
+    pointer-events: none
+  &:hover
+    transform: translateY(px(-2))
+    box-shadow: 0 px(10) px(40) rgba(255, 255, 255, 0.2)
+    border: px(1) solid rgba(255, 255, 255, 0.5)
+
+.imageContainer
+  display: flex
+  align-items: center
+  justify-content: center
+  width: px(150)
+  height: px(150)
+  .image
+    width: px(50)
+    height: px(50)
+    object-fit: cover
+    border-radius: 50%
+    filter: drop-shadow(0 0 px(10) rgba(255, 255, 255, 0.5))
+    mask-image: radial-gradient(circle, black 50%, transparent 75%)
+
+.textContainer
+  flex: 1
+  overflow: hidden
+  .title
+    font-size: px(24)
+    margin-bottom: px(8)
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+  .description
+    font-size: px(16)
+    line-height: 1.4
+    display: -webkit-box
+    -webkit-line-clamp: 2
+    -webkit-box-orient: vertical
+    overflow: hidden
+    text-overflow: ellipsis
