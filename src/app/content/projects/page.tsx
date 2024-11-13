@@ -19,7 +19,7 @@ export default function Index() {
  
     // Add more GitHub repository URLs here
   ];
-
+//try2
   async function fetchMetadata(url: string) {
     try {
       const repoUrl = new URL(url);
