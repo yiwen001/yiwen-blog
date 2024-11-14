@@ -1,81 +1,84 @@
 // pages/content/projects/page.tsx
 
 "use client";
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from './page.module.sass';
+import { motion } from 'framer-motion';
 
-type ProjectMetadata = {
+type Project = {
   title: string;
   description: string;
-  ogImage: string;
-  type?: 'github' | 'chrome-extension';
+  url: string;
+  type: 'github' | 'chrome';
 };
 
-export default function Index() {
-  const [projectsMetadata, setProjectsMetadata] = useState<Array<ProjectMetadata>>([]);
-  const projectUrls = [
-    'https://github.com/yiwen001/Match-4-Game',
-    'https://github.com/yiwen001/GPT-Theme',
+const projects: Project[] = [
+  {
+    title: 'Match-4-Game',
+    description: 'A classic Connect Four game implementation',
+    url: 'https://github.com/yiwen001/Match-4-Game',
+    type: 'github'
+  },
  
-    // Add more GitHub repository URLs here
-  ];
-//try2
-  async function fetchMetadata(url: string) {
-    try {
-      const repoUrl = new URL(url);
-      const parts = repoUrl.pathname.split('/');
-      const owner = parts[1];
-      const repo = parts[2];
+  {
+    title: 'GPT-Theme',
+    description: 'A ChatGPT theme customization project',
+    url: 'https://chromewebstore.google.com/detail/gpt-theme/opgkagnoipbbbpjjnnlnpfoeakdihgkh?authuser=0&hl=en',
+    type: 'chrome'
+  },
+  // 可以继续添加更多项目
+];
 
-      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-        headers: {
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
-        }
-      });
-      const data = await response.json();
-      
-      return {
-        title: data.name,
-        description: data.description,
-        ogImage: `https://opengraph.githubassets.com/${data.id}/${owner}/${repo}`,
-      };
-    } catch (error) {
-      console.error('Error fetching metadata:', error);
-      return null;
+export default function Index() {
+  const getIcon = (type: string) => {
+    switch(type) {
+      case 'chrome':
+        return 'https://www.google.com/chrome/static/images/chrome-logo.svg';
+      case 'github':
+      default:
+        return 'https://github.com/favicon.ico';
     }
-  }
-
-  useEffect(() => {
-    const getMetadata = async () => {
-      const results = await Promise.all(
-        projectUrls.map(url => fetchMetadata(url))
-      );
-      const validResults = results.filter((result): result is NonNullable<typeof result> => result !== null);
-      setProjectsMetadata(validResults);
-    };
-    getMetadata();
-  }, []);
+  };
 
   return (
-    <>
     <div className={styles.container}>
-      {projectsMetadata.map((metadata, index) => (
-        <div 
+      {projects.map((project, index) => (
+        <motion.div 
           key={index} 
           className={styles.card}
-          onClick={() => window.open(projectUrls[index], '_blank')}
+          onClick={() => window.open(project.url, '_blank')}
           style={{ cursor: 'pointer' }}
+          initial={{ 
+            y: -20* index, // 所有卡片初始位置重叠在第一个位置
+            opacity: 0 
+          }}
+          animate={{ 
+            y: 1, // 移动到最终位置
+            opacity: 1 
+          }}
+          transition={{
+            type: "spring",
+            bounce: 0.1,     // 添加弹跳效果
+            duration: 0.1,      // 增加动画时长
+            delay: index * 0.01,
+            damping: 3,       // 减小阻尼以增加弹跳
+            stiffness: 8,   // 增加刚度使动画更有力
+            restDelta: 0.001  // 使动画更精确
+          }}
         >
           <div className={styles.imageContainer}>
-            <img src="https://github.com/favicon.ico" className={styles.image} alt="GitHub Icon" />
+            <img 
+              src={getIcon(project.type)} 
+              className={styles.image} 
+              alt={`${project.type} Icon`} 
+            />
           </div>
           <div className={styles.textContainer}>
-            <h2 className={styles.title}>{metadata.title}</h2>
-            <p className={styles.description}>{metadata.description}</p>
+            <h2 className={styles.title}>{project.title}</h2>
+            <p className={styles.description}>{project.description}</p>
           </div>
-        </div>
+        </motion.div>
       ))}
-      </div>
-    </>
+    </div>
   );
 }
