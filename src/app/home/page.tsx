@@ -3,16 +3,16 @@ import styles from "./page.module.sass";
 import { Button } from "@nextui-org/button";
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import FluidEffect from './components/anime/fluid';
-import Circle from "./components/circle";
+import FluidEffect from '../components/anime/fluid';
+import Circle from "../components/circle";
 import dynamic from 'next/dynamic';
 
-const DynamicShape = dynamic(() => import('./components/DynamicShape'), { ssr: false });
+const DynamicShape = dynamic(() => import('../components/DynamicShape'), { ssr: false });
 
 export default function Home() {
   const router = useRouter();
   const handleClick = () => {
-    router.push('/content/about');
+    router.push('/about');
   };
 
   return (

@@ -22,10 +22,10 @@ export default function RootLayout({
       router.push('/');
     } else if (e.key === 'resume') {
       // 处理简历导航
-      router.push('/content/resume');
+      router.push('/resume');
     } else if (e.key === 'projects') {
-      // 处理博客导航
-      router.push('/content/projects');
+      // 处理项目导航
+      router.push('/projects');
     }
   };
   const menu = (
@@ -40,16 +40,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <div className={styles.layout}>
-          <div className={styles.fixedMenu}>
-            <Dropdown overlay={menu} trigger={['click']} visible={visible} onVisibleChange={handleVisibleChange}>
-              <div className={styles.icon} id={styles.menu} onClick={() => setVisible(!visible)}></div>
-            </Dropdown>
-          </div>
-          {children}
+        <div className={styles.fixedMenu}>
+          <Dropdown overlay={menu} trigger={['click']} visible={visible} onVisibleChange={handleVisibleChange}>
+            <div className={styles.icon} id={styles.menu} onClick={() => setVisible(!visible)}></div>
+          </Dropdown>
         </div>
-        
-     </body>
+        <main className={styles.mainContent}>
+          {children}
+        </main>
+      </body>
     </html>
   )
 }
