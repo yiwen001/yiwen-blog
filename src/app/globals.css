@@ -3,6 +3,9 @@ body {
   margin: 0;
   padding: 0;
   background-color: black;
-  max-width: 1920px;
-  overflow-x: hidden;
+ 
+  scroll-behavior: smooth;
+  height: 100vh;
+  overflow-y: auto;
+ 
 }
