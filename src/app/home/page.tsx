@@ -2,15 +2,20 @@
 import styles from "./page.module.sass";
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Navigation from '../components/Navigation';
-import dynamic from 'next/dynamic';
 import AboutSection from '../about/page';
 import ProjectsSection from '../projects/page';
 
-const DynamicShape = dynamic(() => import('../components/DynamicShape'), { ssr: false });
+interface SectionRefs {
+  [key: string]: HTMLDivElement | null;
+}
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
-  const sectionsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const sectionsRef = useRef<SectionRefs>({
+    home: null,
+    about: null,
+    projects: null
+  });
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   
   const handleScroll = useCallback(() => {
@@ -63,7 +68,9 @@ export default function Home() {
       
       <div className={styles.container}>
         <section 
-          ref={el => sectionsRef.current['home'] = el}
+          ref={(el: HTMLDivElement | null) => {
+            sectionsRef.current['home'] = el;
+          }}
           className={styles.section}
         >
           <div className={styles.content}>
@@ -96,14 +103,18 @@ export default function Home() {
         </section>
 
         <section 
-          ref={el => sectionsRef.current['about'] = el}
+          ref={(el: HTMLDivElement | null) => {
+            sectionsRef.current['about'] = el;
+          }}
           className={styles.section}
         >
           <AboutSection />
         </section>
 
         <section 
-          ref={el => sectionsRef.current['projects'] = el}
+          ref={(el: HTMLDivElement | null) => {
+            sectionsRef.current['projects'] = el;
+          }}
           className={styles.section}
         >
           <ProjectsSection />
