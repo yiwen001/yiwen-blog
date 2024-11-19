@@ -5,8 +5,13 @@ import "./globals.css";
 import React, { useState } from 'react';
 import { Menu } from 'antd';
 import { useRouter } from 'next/navigation';
-import styles from './layout.module.sass'; // 确保你创建了这个 CSS 模块
+import styles from './layout.module.sass';
+import dynamic from 'next/dynamic';
+
+const DynamicShape = dynamic(() => import('./components/DynamicShape'), { ssr: false });
+
 const inter = Inter({ subsets: ["latin"] });
+
 export default function RootLayout({
   children,
 }:  {
@@ -27,7 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        
+        <div className={styles.backgroundShape}>
+          <DynamicShape />
+        </div>
         <main className={styles.mainContent}>
           {children}
         </main>

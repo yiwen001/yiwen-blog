@@ -12,8 +12,8 @@
   background: rgba(255, 255, 255, 0.1)
   backdrop-filter: blur(px(15))
   padding: px(20)
-  width: px(800)
-  height: px(80)
+  width: min(90%, px(800))
+  min-height: px(80)
   display: flex
   flex-direction: row
   color: rgba(255, 255, 255, 0.8)
@@ -21,11 +21,23 @@
   border-radius: px(16)
   align-items: center
   justify-content: center
-  gap: px(40)
+  gap: clamp(px(20), 3vw, px(40))
   box-shadow: 0 px(8) px(32) rgba(255, 255, 255, 0.1)
   position: relative
   transition: all 0.3s ease
   margin: 0 auto
+
+  @media (max-width: px(768))
+    width: 85%
+    padding: px(15)
+    gap: px(20)
+    
+  @media (max-width: px(480))
+    width: 95%
+    padding: px(10)
+    gap: px(15)
+    flex-direction: column
+
   &::before
     content: ""
     position: absolute
@@ -36,10 +48,17 @@
     border-radius: px(16)
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 50%)
     pointer-events: none
+
   &:hover
-    transform: scale(1.5)
+    transform: scale(1.05)
     box-shadow: 0 px(20) px(60) rgba(192, 45, 255, 0.181)
     border: px(1) solid rgba(255, 255, 255, 0.5)
+
+    @media (max-width: px(768))
+      transform: scale(1.03)
+    
+    @media (max-width: px(480))
+      transform: scale(1.02)
 
 .imageContainer
   display: flex

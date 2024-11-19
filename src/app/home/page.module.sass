@@ -152,9 +152,8 @@
 
 .container
   scroll-behavior: smooth
-  height: 100vh
-  overflow-y: auto
   color: white
+  will-change: transform
 
 .section
   min-height: 100vh
@@ -162,5 +161,8 @@
   flex-direction: column
   justify-content: center
   padding: px(20)
+  transform: translateZ(0)
+  will-change: transform
+  backface-visibility: hidden
 
 

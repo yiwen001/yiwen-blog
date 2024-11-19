@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.sass";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Navigation from '../components/Navigation';
 import dynamic from 'next/dynamic';
 import AboutSection from '../about/page';
@@ -11,34 +11,54 @@ const DynamicShape = dynamic(() => import('../components/DynamicShape'), { ssr: 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
   const sectionsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   
-  useEffect(() => {
-    const handleScroll = () => {
+  const handleScroll = useCallback(() => {
+    if (scrollTimeout.current) {
+      return; // 如果已经有待处理的更新，直接返回
+    }
+
+    scrollTimeout.current = setTimeout(() => {
       const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
       
       Object.entries(sectionsRef.current).forEach(([key, element]) => {
         if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (
-            scrollPosition >= offsetTop - 100 && 
-            scrollPosition < offsetTop + offsetHeight - 100
-          ) {
+          const rect = element.getBoundingClientRect();
+          // 使用元素在视口中的位置来判断
+          if (rect.top <= windowHeight * 0.3 && rect.bottom >= windowHeight * 0.3) {
             setActiveSection(key);
           }
         }
       });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+      
+      scrollTimeout.current = null;
+    }, 50); // 50ms 的节流时间
   }, []);
 
-  const scrollToSection = (section: string) => {
-    sectionsRef.current[section]?.scrollIntoView({ behavior: 'smooth' });
-  };
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, [handleScroll]);
+
+  const scrollToSection = useCallback((section: string) => {
+    const element = sectionsRef.current[section];
+    if (element) {
+      const offset = element.offsetTop;
+      window.scrollTo({
+        top: offset,
+        behavior: 'smooth'
+      });
+    }
+  }, []);
 
   return (
-    <>
+    <div className={styles.pageWrapper}>
       <Navigation activeSection={activeSection} onNavClick={scrollToSection} />
       
       <div className={styles.container}>
@@ -51,9 +71,9 @@ export default function Home() {
               <div className={styles.textWrapper}>
                 Hi, I am Yiwen
               </div>
-              <div className={styles.circle}>
+              {/* <div className={styles.circle}>
                 <DynamicShape />
-              </div>
+              </div> */}
             </div>
           </div>
           <div className={styles.footer}>
@@ -89,6 +109,6 @@ export default function Home() {
           <ProjectsSection />
         </section>
       </div>
-    </>
+    </div>
   );
 }

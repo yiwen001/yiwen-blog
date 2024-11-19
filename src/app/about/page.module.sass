@@ -22,13 +22,18 @@
   color: #a9a9a9
   justify-content: center
   align-items: center
-  overflow-x: hidden
-  overflow-y: auto
+  transform: translateZ(0)
+  will-change: transform
+  backface-visibility: hidden
+  overflow: hidden
+ 
 .secondMain
   margin: px(60)
   margin-left: px(120)
   justify-content: center
   align-items: center
+  min-height: 100vh
+  transform: translateZ(0)
 .secondNav
   display: flex
   flex-direction: row
@@ -45,6 +50,27 @@
   justify-content: center
   height: 100%
   gap: px(50)
+  background: rgba(255, 255, 255, 0.1)
+  backdrop-filter: blur(px(15))
+  padding: px(40)  // 增加内边距使文字更易读
+  border: px(1) solid rgba(255, 255, 255, 0.3)
+  border-radius: px(8)
+  position: relative
+  transition: all 0.3s ease
+  box-shadow: 0 px(8) px(32) rgba(255, 255, 255, 0.1)
+    
+  &::before
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    border-radius: px(8)
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 50%)
+    pointer-events: none
+    
+ 
 .intro2
   display: flex
   height: px(300)
