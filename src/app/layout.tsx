@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import styles from './layout.module.sass';
 import dynamic from 'next/dynamic';
 
-const DynamicShape = dynamic(() => import('./components/DynamicShape'), { ssr: false });
+const DynamicSphere = dynamic(() => import('./components/SphereEffect'), { ssr: false });
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className={styles.backgroundShape}>
-          <DynamicShape />
+          <DynamicSphere />
         </div>
         <main className={styles.mainContent}>
           {children}

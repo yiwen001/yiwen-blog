@@ -13,6 +13,7 @@
     "@nextui-org/dropdown": "^2.1.26",
     "@nextui-org/react": "^2.4.8",
     "@tweenjs/tween.js": "^25.0.0",
+    "@types/three": "^0.170.0",
     "antd": "^5.19.2",
     "cheerio": "^1.0.0",
     "framer-motion": "^11.11.17",
@@ -26,7 +27,8 @@
     "react-pdf": "^9.1.1",
     "react-router-dom": "^6.23.1",
     "react-scroll": "^1.9.0",
-    "sass": "^1.77.8"
+    "sass": "^1.77.8",
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "@types/node": "^20",
