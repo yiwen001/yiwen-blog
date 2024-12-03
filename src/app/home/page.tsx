@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Navigation from '../components/Navigation';
 import AboutSection from '../about/page';
 import ProjectsSection from '../projects/page';
-
+import Resume from '../resume/page';
 interface SectionRefs {
   [key: string]: HTMLDivElement | null;
 }
@@ -14,7 +14,8 @@ export default function Home() {
   const sectionsRef = useRef<SectionRefs>({
     home: null,
     about: null,
-    projects: null
+    projects: null,
+    resume: null,
   });
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   
@@ -118,6 +119,15 @@ export default function Home() {
           className={styles.section}
         >
           <ProjectsSection />
+        </section>
+
+        <section
+          ref={(el: HTMLDivElement | null) => {
+            sectionsRef.current['resume'] = el;
+          }}
+          className={styles.section}
+        >
+          <Resume/>
         </section>
       </div>
     </div>

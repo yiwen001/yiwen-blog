@@ -28,6 +28,12 @@ export default function Navigation({ activeSection, onNavClick }: NavigationProp
         >
           Projects
         </li>
+        <li 
+          className={activeSection === 'resume' ? styles.active : ''}
+          onClick={() => onNavClick('resume')}
+        >
+          Resume
+        </li>
       </ul>
     </nav>
   );

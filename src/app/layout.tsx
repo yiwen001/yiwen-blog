@@ -19,15 +19,7 @@ export default function RootLayout({
 }) {
   const router = useRouter();
   
-  const handleMenuClick = (e: any) => {
-    if (e.key === 'home') {
-      router.push('/');
-    } else if (e.key === 'resume') {
-      router.push('/resume');
-    } else if (e.key === 'projects') {
-      router.push('/projects');
-    }
-  };
+ 
 
   return (
     <html lang="en">

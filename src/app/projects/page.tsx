@@ -3,7 +3,7 @@
 "use client";
 import React from 'react';
 import styles from './page.module.sass';
-import { motion } from 'framer-motion';
+ 
 
 type Project = {
   title: string;
@@ -43,28 +43,10 @@ export default function Index() {
   return (
     <div className={styles.container}>
       {projects.map((project, index) => (
-        <motion.div 
+        <div
           key={index} 
           className={styles.card}
-          onClick={() => window.open(project.url, '_blank')}
-          style={{ cursor: 'pointer' }}
-          initial={{ 
-            y: -20* index, // 所有卡片初始位置重叠在第一个位置
-            opacity: 0 
-          }}
-          animate={{ 
-            y: 1, // 移动到最终位置
-            opacity: 1 
-          }}
-          transition={{
-            type: "spring",
-            bounce: 0.1,     // 添加弹跳效果
-            duration: 0.1,      // 增加动画时长
-            delay: index * 0.01,
-            damping: 3,       // 减小阻尼以增加弹跳
-            stiffness: 8,   // 增加刚度使动画更有力
-            restDelta: 0.001  // 使动画更精确
-          }}
+   
         >
           <div className={styles.imageContainer}>
             <img 
@@ -77,7 +59,7 @@ export default function Index() {
             <h2 className={styles.title}>{project.title}</h2>
             <p className={styles.description}>{project.description}</p>
           </div>
-        </motion.div>
+        </ div>
       ))}
     </div>
   );
