@@ -28,7 +28,7 @@ const SphereEffect = () => {
       void main() {
         vUv = uv;
         vNormal = normal;
-        
+        //try again
         vec3 pos = position;
         // 基础波浪效果（沿x轴）
         float baseWave = sin(position.x * 27.0 + time) * 0.3;
