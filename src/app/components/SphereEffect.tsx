@@ -66,11 +66,13 @@ const SphereEffect = () => {
     const material = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        mousePos: { value: new THREE.Vector2(0, 0) }
+        mousePos: { value: new THREE.Vector2(0, 0) },
+        prevMousePos: { value: new THREE.Vector2(0, 0) }
       },
       vertexShader,
       fragmentShader,
     });
+  
 
     const sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);

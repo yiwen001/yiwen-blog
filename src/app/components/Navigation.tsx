@@ -34,6 +34,7 @@ export default function Navigation({ activeSection, onNavClick }: NavigationProp
         >
           Resume
         </li>
+        
       </ul>
     </nav>
   );

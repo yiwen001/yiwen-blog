@@ -5,6 +5,7 @@ import Navigation from '../components/Navigation';
 import AboutSection from '../about/page';
 import ProjectsSection from '../projects/page';
 import Resume from '../resume/page';
+import Basic3D from '../basic3D/page';
 interface SectionRefs {
   [key: string]: HTMLDivElement | null;
 }
@@ -16,6 +17,7 @@ export default function Home() {
     about: null,
     projects: null,
     resume: null,
+  
   });
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   
@@ -129,6 +131,7 @@ export default function Home() {
         >
           <Resume/>
         </section>
+    
       </div>
     </div>
   );

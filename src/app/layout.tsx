@@ -7,8 +7,8 @@ import { Menu } from 'antd';
 import { useRouter } from 'next/navigation';
 import styles from './layout.module.sass';
 import dynamic from 'next/dynamic';
-
-const DynamicSphere = dynamic(() => import('./components/SphereEffect'), { ssr: false });
+import SphereEffect from './components/SphereEffect';
+ 
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className={styles.backgroundShape}>
-          <DynamicSphere />
+         <SphereEffect/>
         </div>
         <main className={styles.mainContent}>
           {children}

@@ -46,7 +46,8 @@ export default function Index() {
         <div
           key={index} 
           className={styles.card}
-   
+          onClick={() => window.open(project.url, '_blank')}
+          style={{ cursor: 'pointer' }}
         >
           <div className={styles.imageContainer}>
             <img 
@@ -59,7 +60,7 @@ export default function Index() {
             <h2 className={styles.title}>{project.title}</h2>
             <p className={styles.description}>{project.description}</p>
           </div>
-        </ div>
+        </div>
       ))}
     </div>
   );
