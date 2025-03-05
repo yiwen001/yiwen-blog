@@ -12,18 +12,31 @@ interface SectionRefs {
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const bgmRef = useRef<HTMLAudioElement | null>(null);
+  const clickSoundRef = useRef<HTMLAudioElement | null>(null);
+  const scrollSoundRef = useRef<HTMLAudioElement | null>(null);
+  const lastScrollTime = useRef<number>(0);
   const sectionsRef = useRef<SectionRefs>({
     home: null,
     about: null,
     projects: null,
     resume: null,
-  
   });
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   
   const handleScroll = useCallback(() => {
     if (scrollTimeout.current) {
-      return; // 如果已经有待处理的更新，直接返回
+      return;
+    }
+
+    // 播放滚动音效
+    const currentTime = Date.now();
+    if (currentTime - lastScrollTime.current > 50 && scrollSoundRef.current) { // 50ms 节流
+      scrollSoundRef.current.currentTime = 0;
+      scrollSoundRef.current.play()
+        .catch(err => console.log('Scroll sound play failed:', err));
+      lastScrollTime.current = currentTime;
     }
 
     scrollTimeout.current = setTimeout(() => {
@@ -33,7 +46,6 @@ export default function Home() {
       Object.entries(sectionsRef.current).forEach(([key, element]) => {
         if (element) {
           const rect = element.getBoundingClientRect();
-          // 使用元素在视口中的位置来判断
           if (rect.top <= windowHeight * 0.3 && rect.bottom >= windowHeight * 0.3) {
             setActiveSection(key);
           }
@@ -41,7 +53,7 @@ export default function Home() {
       });
       
       scrollTimeout.current = null;
-    }, 50); // 50ms 的节流时间
+    }, 50);
   }, []);
 
   useEffect(() => {
@@ -53,6 +65,56 @@ export default function Home() {
       }
     };
   }, [handleScroll]);
+
+  useEffect(() => {
+    // 创建背景音乐
+    const bgm = new Audio('/audio/SootheMySou_Departure.mp3');
+    bgm.loop = true;
+    bgm.volume = 0.3;
+    bgmRef.current = bgm;
+
+    // 创建点击音效
+    const clickSound = new Audio('/audio/mouseclick.mp3');
+    clickSound.volume = 0.1;
+    clickSoundRef.current = clickSound;
+
+   
+
+    // 添加点击事件监听器
+    const handleClick = () => {
+      if (clickSoundRef.current) {
+        
+        clickSoundRef.current.play();
+      }
+    };
+
+   
+
+    document.addEventListener('click', handleClick);
+ 
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+     
+      if (scrollSoundRef.current) {
+        scrollSoundRef.current.removeEventListener('timeupdate', () => {});
+      }
+      if (bgmRef.current) {
+        bgmRef.current.pause();
+      }
+    };
+  }, []);
+
+  const toggleMusic = useCallback(() => {
+    if (bgmRef.current) {
+      if (isMusicPlaying) {
+        bgmRef.current.pause();
+      } else {
+        bgmRef.current.play();
+      }
+      setIsMusicPlaying(!isMusicPlaying);
+    }
+  }, [isMusicPlaying]);
 
   const scrollToSection = useCallback((section: string) => {
     const element = sectionsRef.current[section];
@@ -70,6 +132,14 @@ export default function Home() {
       <Navigation activeSection={activeSection} onNavClick={scrollToSection} />
       
       <div className={styles.container}>
+        <button 
+          onClick={toggleMusic}
+          className={styles.musicToggle}
+          title={isMusicPlaying ? "Pause Music" : "Play Music"}
+        >
+          {isMusicPlaying ? "🎷" : "🤐"}
+        </button>
+        
         <section 
           ref={(el: HTMLDivElement | null) => {
             sectionsRef.current['home'] = el;
