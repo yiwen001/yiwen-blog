@@ -5,11 +5,11 @@ const SphereEffect = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const lastPlayTime = useRef<number>(0);
+  const sphereRef = useRef<THREE.Mesh | null>(null);
   
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // 创建场景
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -17,26 +17,22 @@ const SphereEffect = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
-    // 创建 Web Audio Context
     audioContextRef.current = new AudioContext();
 
-    // 创建音效函数
     const playSound = (mouseX: number) => {
       if (!audioContextRef.current) return;
       
       const currentTime = Date.now();
-      if (currentTime - lastPlayTime.current < 150) return; // 150ms节流
+      if (currentTime - lastPlayTime.current < 150) return;
       
       const oscillator = audioContextRef.current.createOscillator();
       const gainNode = audioContextRef.current.createGain();
       
-      // 创建滤波器
       const filter = audioContextRef.current.createBiquadFilter();
       filter.type = 'bandpass';
-      filter.frequency.value = 1000 + mouseX * 500; // 根据鼠标位置改变频率
-      filter.Q.value = 1.5; // 增加 Q 值使音色更清晰
+      filter.frequency.value = 1000 + mouseX * 500;
+      filter.Q.value = 1.5;
       
-      // 设置音色
       oscillator.type = 'sine';
       oscillator.frequency.setValueAtTime(200 + mouseX * 200, audioContextRef.current.currentTime);
       oscillator.frequency.exponentialRampToValueAtTime(
@@ -44,52 +40,54 @@ const SphereEffect = () => {
         audioContextRef.current.currentTime + 0.2
       );
       
-      // 设置音量包络
       gainNode.gain.setValueAtTime(0, audioContextRef.current.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.9, audioContextRef.current.currentTime + 0.01); // 增加音量到 0.7
+      gainNode.gain.linearRampToValueAtTime(0.9, audioContextRef.current.currentTime + 0.01);
       gainNode.gain.exponentialRampToValueAtTime(0.01, audioContextRef.current.currentTime + 0.2);
       
-      // 连接节点
       oscillator.connect(filter);
       filter.connect(gainNode);
       gainNode.connect(audioContextRef.current.destination);
       
-      // 播放声音
       oscillator.start();
       oscillator.stop(audioContextRef.current.currentTime + 0.2);
       
       lastPlayTime.current = currentTime;
     };
 
-    // 创建球体
     const geometry = new THREE.SphereGeometry(1, 100, 100);
 
-    // 自定义着色器
     const vertexShader = `
       varying vec2 vUv;
       varying vec3 vNormal;
+      varying vec3 vPosition;
       uniform float time;
       uniform vec2 mousePos;
+      uniform float openProgress;
       
       void main() {
         vUv = uv;
         vNormal = normal;
-        //try again
         vec3 pos = position;
-        // 基础波浪效果（沿x轴）
+        
         float baseWave = sin(position.x * 27.0 + time) * 0.3;
         
-        // 计算到鼠标的距离，但只考虑y轴方向的影响
         float distanceToMouse = abs(position.x - mousePos.x);
-        float mouseEffect = exp(-distanceToMouse * 3.0); // 指数衰减
+        float mouseEffect = exp(-distanceToMouse * 3.0);
         
-        // 在x方向上产生额外的畸变
         float distortion = mouseEffect * sin(position.x * 27.0 + time) * 0.1;
         
-        // 组合效果：基础波浪 + 鼠标引起的畸变
         float displacement = baseWave + distortion;
+        
+        if (openProgress > 0.0) {
+          float extraWave = sin(position.y * 20.0 + time * 2.0) * 0.8 * openProgress;
+          extraWave += sin(position.z * 15.0 + time * 1.5) * 0.5 * openProgress;
+          extraWave += sin(position.x * 37.0 + time * 1.2) * 0.6 * openProgress;
+          displacement += extraWave;
+        }
+        
         pos += normal * displacement;
         
+        vPosition = pos;
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
       }
     `;
@@ -97,51 +95,76 @@ const SphereEffect = () => {
     const fragmentShader = `
       varying vec2 vUv;
       varying vec3 vNormal;
+      varying vec3 vPosition;
       uniform float time;
+      uniform float openProgress;
       
       void main() { 
-        vec3 color = vec3(0.5 + 0.5 * sin(time), 0.5, 0.8);
+        vec3 color1 = vec3(0.5 + 0.5 * sin(time), 0.5, 0.8);
+        vec3 color2 = vec3(0.2, 0.6, 0.9);
+        vec3 color3 = vec3(0.9, 0.4, 0.6);
+        
+        vec3 finalColor = color1;
+        
+        if (openProgress > 0.0) {
+          float gradient = (vPosition.x + 1.0) * 0.5;
+          float wave = sin(gradient * 10.0 + time) * 0.5 + 0.5;
+          
+          finalColor = mix(color2, color3, gradient);
+          finalColor = mix(color1, finalColor, openProgress);
+          finalColor += wave * 0.1 * openProgress;
+        }
+        
         vec3 light = normalize(vec3(10, 5, 20));
         float diff = dot(vNormal, light);
         
-        gl_FragColor = vec4(color * diff,100.0);
+        gl_FragColor = vec4(finalColor * diff, 1.0);
       }
     `;
 
-    // 创建材质
     const material = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
         mousePos: { value: new THREE.Vector2(0, 0) },
-        prevMousePos: { value: new THREE.Vector2(0, 0) }
+        prevMousePos: { value: new THREE.Vector2(0, 0) },
+        openProgress: { value: 0 }
       },
       vertexShader,
       fragmentShader,
     });
-  
 
     const sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
+    
+    sphereRef.current = sphere;
 
     camera.position.z = 3;
 
-    // 动画循环
+    let targetPosition = { x: 0, y: 0 };
+    let targetOpenProgress = 0;
+
     const animate = () => {
       requestAnimationFrame(animate);
       
-      // 更新时间uniform
       material.uniforms.time.value += 0.01;
       
-      // 旋转球体
       sphere.rotation.x += 0.001;
       sphere.rotation.y += 0.002;
+      
+      const lerpFactor = 0.05;
+      
+      sphere.position.x += (targetPosition.x - sphere.position.x) * lerpFactor;
+      sphere.position.y += (targetPosition.y - sphere.position.y) * lerpFactor;
+      
+      const currentOpenProgress = material.uniforms.openProgress.value;
+      const newOpenProgress = currentOpenProgress + (targetOpenProgress - currentOpenProgress) * lerpFactor;
+      material.uniforms.openProgress.value = newOpenProgress;
       
       renderer.render(scene, camera);
     };
 
     animate();
 
-    // 处理窗口大小变化
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -150,12 +173,10 @@ const SphereEffect = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // 添加这些变量的定义
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
     let prevMousePosition = new THREE.Vector3();
 
-    // 修改鼠标移动处理函数
     const handleMouseMove = (event: MouseEvent) => {
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -164,24 +185,39 @@ const SphereEffect = () => {
       const intersects = raycaster.intersectObject(sphere);
 
       if (intersects.length > 0) {
-        // 保存前一帧的位置
         prevMousePosition.copy(material.uniforms.mousePos.value);
         
-        // 更新当前位置
         const point = intersects[0].point;
         material.uniforms.mousePos.value.copy(point);
         material.uniforms.prevMousePos.value.copy(prevMousePosition);
 
-        // 播放动态音效
         playSound(point.x);
       }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
 
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      if (scrollY > windowHeight * 0.5) {
+        const scrollProgress = Math.min((scrollY - windowHeight * 0.5) / (windowHeight * 0.5), 1);
+        
+        targetPosition = { x: -4, y: -2 };
+        targetOpenProgress = scrollProgress;
+      } else {
+        targetPosition = { x: 0, y: 0 };
+        targetOpenProgress = 0;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
       if (audioContextRef.current) {
         audioContextRef.current.close();
       }
