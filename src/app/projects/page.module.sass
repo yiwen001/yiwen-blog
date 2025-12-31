@@ -1,3 +1,5 @@
+// page.module.sass
+
 @import "./styles/helper.sass"
 
 .container
@@ -5,21 +7,17 @@
   display: flex
   flex-direction: column
   align-items: center
-  gap: px(40)
+  gap: px(80)
   padding: px(20)
 
 .card
+  position: relative
   cursor: pointer
-  transition: transform 0.3s ease
 
-  &:hover
-    transform: scale(1.02)
-
-.image
-  width: 100%
+.canvas
+  display: block
   max-width: px(800)
+  width: 100%
   height: auto
-  border-radius: px(16)
-  box-shadow: 0 px(8) px(32) rgba(255, 255, 255, 0.1)
-
-    text-overflow: ellipsis
+  transition: opacity 0.8s ease
+  cursor: pointer
