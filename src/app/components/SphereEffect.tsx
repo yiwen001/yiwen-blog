@@ -99,7 +99,7 @@ const SphereEffect = () => {
       varying vec3 vNormal;
       uniform float time;
       
-      void main() {
+      void main() { 
         vec3 color = vec3(0.5 + 0.5 * sin(time), 0.5, 0.8);
         vec3 light = normalize(vec3(10, 5, 20));
         float diff = dot(vNormal, light);

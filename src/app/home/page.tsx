@@ -45,7 +45,7 @@ export default function Home() {
       
       Object.entries(sectionsRef.current).forEach(([key, element]) => {
         if (element) {
-          const rect = element.getBoundingClientRect();
+          const rect = element.getBoundingClientRect();//获得当前Dom对象
           if (rect.top <= windowHeight * 0.3 && rect.bottom >= windowHeight * 0.3) {
             setActiveSection(key);
           }
@@ -64,7 +64,7 @@ export default function Home() {
         clearTimeout(scrollTimeout.current);
       }
     };
-  }, [handleScroll]);
+  }, [ ]);
 
   useEffect(() => {
     // 创建背景音乐
@@ -149,7 +149,7 @@ export default function Home() {
           <div className={styles.content}>
             <div className={styles.mainline}>
               <div className={styles.textWrapper}>
-                Hi, I am Yiwen
+                Hi, I am HAHAHAHAHA
               </div>
               {/* <div className={styles.circle}>
                 <DynamicShape />

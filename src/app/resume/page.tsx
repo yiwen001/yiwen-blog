@@ -6,7 +6,8 @@ export default function Index() {
     return (
         <div className={styles.container}>
            <div className={styles.resume}>
-            <embed src={pdfUrl} type="application/pdf" width='100%' height='100%' />
+            {/* <embed src={pdfUrl} type="application/pdf" width='100%' height='100%' /> */}
+             resume
             </div>
         </div>
     );
