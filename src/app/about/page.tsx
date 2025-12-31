@@ -20,7 +20,7 @@ export default function AboutPage() {
             In the digital ether, where pixels dance and code whispers, 
         this space emerges - a sanctuary of serendipity. 
         Here, the boundaries between art and technology dissolve, 
-        like morning mist under the sun's gentle caress.
+        like morning mist under the sun&apos;s gentle caress.
 
         Each interaction is a ripple in the pond of consciousness, 
         a fleeting moment where mathematics meets poetry. 
@@ -35,14 +35,14 @@ export default function AboutPage() {
             This is not merely a website, but a living canvas - 
         where ideas bloom like wildflowers in the spring, 
         and creativity flows like a river carving its path through stone. 
-        It's a mirror reflecting the infinite possibilities of the digital realm, 
+        It&apos;s a mirror reflecting the infinite possibilities of the digital realm, 
         and a window into the soul of its creator.
 
         Wander through these digital corridors, 
         where every click is a step on a journey of discovery. 
         Let the colors and shapes speak to your subconscious, 
         and allow the subtle harmonies to resonate within you. 
-        For in this space, we don't just observe - we experience, 
+        For in this space, we don&apos;t just observe - we experience, 
         we feel, we become part of the ever-evolving digital tapestry.
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 "use client";
 import React from 'react';
+import Image from 'next/image';
 import styles from './page.module.sass';
  
 
@@ -50,10 +51,12 @@ export default function Index() {
           style={{ cursor: 'pointer' }}
         >
           <div className={styles.imageContainer}>
-            <img 
+            <Image 
               src={getIcon(project.type)} 
               className={styles.image} 
-              alt={`${project.type} Icon`} 
+              alt={`${project.type} Icon`}
+              width={48}
+              height={48}
             />
           </div>
           <div className={styles.textContainer}>
