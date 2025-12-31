@@ -5,7 +5,6 @@ import Navigation from '../components/Navigation';
 import AboutSection from '../about/page';
 import ProjectsSection from '../projects/page';
 import Resume from '../resume/page';
-import Basic3D from '../basic3D/page';
 interface SectionRefs {
   [key: string]: HTMLDivElement | null;
 }
