@@ -7,17 +7,75 @@
   display: flex
   flex-direction: column
   align-items: center
-  gap: px(80)
+  gap: px(60)
   padding: px(20)
 
 .card
-  position: relative
   cursor: pointer
+  position: relative
+  border-radius: px(16)
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: px(20)
+  
+  &:hover
+    .canvas
+      filter: brightness(1.05)
+
+.imageWrapper
+  position: relative
+ 
+  background: rgba(255, 255, 255, 0.05)
+  backdrop-filter: blur(px(10))
+ 
+  border: px(1) solid rgba(255, 255, 255, 0.1)
+  transition: all 0.3s ease
+  
+  &:hover
+    background: rgba(255, 255, 255, 0.08)
+   
 
 .canvas
   display: block
   max-width: px(800)
   width: 100%
   height: auto
-  transition: opacity 0.8s ease
+  border-radius: px(12)
+  box-shadow: 0 px(8) px(32) rgba(255, 255, 255, 0.1)
+  transition: filter 0.3s ease, opacity 0.5s ease
   cursor: pointer
+  
+  &:hover
+    box-shadow: 0 px(12) px(48) rgba(255, 255, 255, 0.15)
+
+.overlay
+  position: relative
+  background: rgba(0, 0, 0, 0.3)
+  border-radius: px(12)
+  padding: px(12) px(20)
+  pointer-events: none
+  backdrop-filter: blur(px(2))
+  margin-top: px(10)
+
+.info
+  text-align: left
+  padding: 0
+
+.title
+  font-size: px(24)
+  font-weight: 700
+  color: rgba(255, 255, 255, 1)
+  margin-bottom: px(4)
+  letter-spacing: 0.8px
+  text-shadow: 0 px(2) px(8) rgba(0, 0, 0, 0.5)
+
+.description
+  font-size: px(13)
+  color: rgba(255, 255, 255, 0.8)
+  line-height: 1.3
+  max-width: px(500)
+  font-weight: 300
+  letter-spacing: 0.2px
+
