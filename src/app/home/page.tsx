@@ -148,7 +148,7 @@ export default function Home() {
           <div className={styles.content}>
             <div className={styles.mainline}>
               <div className={styles.textWrapper}>
-                Hi, I am HAHAHAHAHA
+                Hi, I am Yiwen
               </div>
               {/* <div className={styles.circle}>
                 <DynamicShape />
